@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow · Agile Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon"><i data-lucide="check-square"></i></div>
+        <div>
+          <h1>TaskFlow</h1>
+          <p class="subtitle">Sprint Board & Focus Hub</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <div class="timer-chip">
+          <i data-lucide="clock"></i>
+          <span id="timer-display">25:00</span>
+          <button id="toggle-timer-btn" class="icon-btn" title="Toggle Pomodoro"><i data-lucide="play"></i></button>
+        </div>
+        <button id="new-task-btn" class="btn btn-primary">
+          <i data-lucide="plus"></i> Add Task
+        </button>
+      </div>
+    </header>
+
+    <div class="board-metrics">
+      <div class="metric-item">
+        <span class="metric-val" id="total-count">0</span>
+        <span class="metric-label">Total Tasks</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-val" id="done-count">0</span>
+        <span class="metric-label">Completed</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-val" id="progress-percent">0%</span>
+        <span class="metric-label">Sprint Progress</span>
+      </div>
+    </div>
+
+    <main class="board-grid">
+      <!-- Column: Todo -->
+      <section class="column" data-status="todo">
+        <div class="column-header">
+          <div class="column-title">
+            <span class="status-dot todo"></span>
+            <h2>To Do</h2>
+          </div>
+          <span class="count-badge" id="count-todo">0</span>
+        </div>
+        <div class="cards-list" id="list-todo"></div>
+      </section>
+
+      <!-- Column: In Progress -->
+      <section class="column" data-status="in-progress">
+        <div class="column-header">
+          <div class="column-title">
+            <span class="status-dot in-progress"></span>
+            <h2>In Progress</h2>
+          </div>
+          <span class="count-badge" id="count-in-progress">0</span>
+        </div>
+        <div class="cards-list" id="list-in-progress"></div>
+      </section>
+
+      <!-- Column: Done -->
+      <section class="column" data-status="done">
+        <div class="column-header">
+          <div class="column-title">
+            <span class="status-dot done"></span>
+            <h2>Completed</h2>
+          </div>
+          <span class="count-badge" id="count-done">0</span>
+        </div>
+        <div class="cards-list" id="list-done"></div>
+      </section>
+    </main>
+
+    <!-- Modal for new task -->
+    <div id="task-modal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Create New Task</h3>
+          <button id="close-modal-btn" class="icon-btn"><i data-lucide="x"></i></button>
+        </div>
+        <form id="task-form">
+          <div class="form-group">
+            <label for="task-title-input">Task Title</label>
+            <input type="text" id="task-title-input" placeholder="e.g. Implement OAuth auth provider" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="task-priority-select">Priority</label>
+              <select id="task-priority-select">
+                <option value="high">High</option>
+                <option value="medium" selected>Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="task-column-select">Status</label>
+              <select id="task-column-select">
+                <option value="todo">To Do</option>
+                <option value="in-progress">In Progress</option>
+                <option value="done">Completed</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="cancel-task-btn" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary">Create Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
